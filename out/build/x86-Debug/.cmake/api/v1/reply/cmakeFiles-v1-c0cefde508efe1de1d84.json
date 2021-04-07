@@ -6,7 +6,16 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "out/build/x64-Debug (default)/CMakeFiles/3.18.20081302-MSVC_2/CMakeSystem.cmake"
+			"path" : "out/build/x86-Debug/CMakeFiles/3.18.20081302-MSVC_2/CMakeSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Users/willg/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.18/Modules/CMakeDependentOption.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -15,11 +24,11 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "out/build/x64-Debug (default)/CMakeFiles/3.18.20081302-MSVC_2/CMakeCCompiler.cmake"
+			"path" : "out/build/x86-Debug/CMakeFiles/3.18.20081302-MSVC_2/CMakeCCompiler.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "out/build/x64-Debug (default)/CMakeFiles/3.18.20081302-MSVC_2/CMakeCXXCompiler.cmake"
+			"path" : "out/build/x86-Debug/CMakeFiles/3.18.20081302-MSVC_2/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -73,7 +82,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "out/build/x64-Debug (default)/CMakeFiles/3.18.20081302-MSVC_2/CMakeRCCompiler.cmake"
+			"path" : "out/build/x86-Debug/CMakeFiles/3.18.20081302-MSVC_2/CMakeRCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -119,12 +128,36 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.18/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets-debug.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets-release.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfigDependencies.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/willg/OneDrive/CS 202x Project/out/build/x64-Debug (default)",
+		"build" : "C:/Users/willg/OneDrive/CS 202x Project/out/build/x86-Debug",
 		"source" : "C:/Users/willg/OneDrive/CS 202x Project"
 	},
 	"version" : 
