@@ -19,7 +19,7 @@
 		],
 		"files" : 
 		[
-			"C:/Users/willg/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"C:/Users/Chris/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake",
 			"CMakeLists.txt"
 		],
 		"nodes" : 
@@ -30,7 +30,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 11,
+				"line" : 13,
 				"parent" : 0
 			},
 			{
@@ -42,7 +42,7 @@
 			{
 				"command" : 2,
 				"file" : 1,
-				"line" : 15,
+				"line" : 17,
 				"parent" : 0
 			}
 		]
@@ -64,7 +64,7 @@
 				{
 					"backtrace" : 3,
 					"isSystem" : true,
-					"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/include"
+					"path" : "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/include"
 				}
 			],
 			"language" : "CXX",
@@ -89,20 +89,20 @@
 			},
 			{
 				"backtrace" : 3,
-				"fragment" : "C:\\Users\\willg\\source\\repos\\vcpkg\\installed\\x86-windows\\debug\\lib\\sfml-graphics-d.lib",
+				"fragment" : "C:\\Users\\Chris\\source\\repos\\vcpkg\\installed\\x86-windows\\debug\\lib\\sfml-graphics-d.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 3,
-				"fragment" : "C:\\Users\\willg\\source\\repos\\vcpkg\\installed\\x86-windows\\debug\\lib\\sfml-audio-d.lib",
+				"fragment" : "C:\\Users\\Chris\\source\\repos\\vcpkg\\installed\\x86-windows\\debug\\lib\\sfml-audio-d.lib",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "C:\\Users\\willg\\source\\repos\\vcpkg\\installed\\x86-windows\\debug\\lib\\sfml-window-d.lib",
+				"fragment" : "C:\\Users\\Chris\\source\\repos\\vcpkg\\installed\\x86-windows\\debug\\lib\\sfml-window-d.lib",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "C:\\Users\\willg\\source\\repos\\vcpkg\\installed\\x86-windows\\debug\\lib\\sfml-system-d.lib",
+				"fragment" : "C:\\Users\\Chris\\source\\repos\\vcpkg\\installed\\x86-windows\\debug\\lib\\sfml-system-d.lib",
 				"role" : "libraries"
 			},
 			{
