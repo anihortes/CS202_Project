@@ -6,6 +6,7 @@
 Game::Game(){
     this -> initVariables();
     this -> initWindow();
+    this->initEnemies();
 }
 
 Game::~Game(){
@@ -16,7 +17,9 @@ Game::~Game(){
 
 //Private function
 void Game::initWindow() {
-    this -> _window = new sf::RenderWindow(sf::VideoMode(400, 400), "SFML window");
+    this -> _window = new sf::RenderWindow
+            (sf::VideoMode(400, 400), "SFML window");
+    this->_window->setFramerateLimit(60);
 }
 
 //Private function
@@ -56,6 +59,14 @@ void Game::update() {
 void Game::render() {
     this->_window->clear();
     //draw objects here
-
+    this->_window->draw(this->_enemy);
     this->_window->display();
+}
+
+void Game::initEnemies() {
+    this->_enemy.setPosition(1.f,20.f);
+    this->_enemy.setSize(sf::Vector2f(100.f,100.f));
+    this->_enemy.setFillColor(sf::Color::Cyan);
+    this->_enemy.setOutlineColor(sf::Color::Blue);
+    this->_enemy.setOutlineThickness(2.f);
 }

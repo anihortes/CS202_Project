@@ -33,10 +33,16 @@ public:
 };
 
 int main() {
+    //make game initializer
     Game game;
 
+    //loop game
     while (game.running()) {
+
+        //update game
         game.update();
+
+        //render game
         game.render();
     }
 

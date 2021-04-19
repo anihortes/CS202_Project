@@ -27,9 +27,14 @@ public:
 private:
     sf::RenderWindow *_window;
     sf::Event _ev;
+
+    //game objects
+    sf::RectangleShape _enemy;
+
     //private functions
     void initVariables();
     void initWindow();
+    void initEnemies();
 };
 
 
