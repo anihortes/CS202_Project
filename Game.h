@@ -2,6 +2,7 @@
 // Created by A. Harrison Owen on 4/18/2021.
 //
 #pragma once
+#include <iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

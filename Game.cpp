@@ -49,6 +49,7 @@ void Game::pollEvents() {
 //under the hood logic and where things are
 void Game::update() {
     this -> pollEvents();
+
 }
 
 
@@ -66,6 +67,7 @@ void Game::render() {
 void Game::initEnemies() {
     this->_enemy.setPosition(1.f,20.f);
     this->_enemy.setSize(sf::Vector2f(100.f,100.f));
+    this->_enemy.setScale(sf::Vector2f(0.5f,0.5f));
     this->_enemy.setFillColor(sf::Color::Cyan);
     this->_enemy.setOutlineColor(sf::Color::Blue);
     this->_enemy.setOutlineThickness(2.f);
