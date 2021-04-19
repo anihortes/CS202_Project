@@ -1,0 +1,36 @@
+//
+// Created by A. Harrison Owen on 4/18/2021.
+//
+#pragma once
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+
+#ifndef CS202_PROJECT_GAME_H
+#define CS202_PROJECT_GAME_H
+
+// This class is the game engine
+class Game {
+public:
+    Game(); //constructor and destructor
+    virtual ~Game();
+
+    const bool running() const;
+
+    void pollEvents();
+    void update();
+    void render();
+
+
+
+private:
+    sf::RenderWindow *_window;
+    sf::Event _ev;
+    //private functions
+    void initVariables();
+    void initWindow();
+};
+
+
+#endif //CS202_PROJECT_GAME_H

@@ -10,7 +10,7 @@ set(SFML_DIR "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/share/sfml
 
 set(SFML_DIR "C:/vcpkg-master/installed/x86-windows/share/sfml")
 
-add_executable(CS202_Project main.cpp)
+add_executable(CS202_Project main.cpp Game.cpp Game.h)
 
 find_package(SFML COMPONENTS graphics audio CONFIG REQUIRED)
 
