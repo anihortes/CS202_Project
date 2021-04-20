@@ -6,6 +6,7 @@
 Game::Game(){
     this -> initVariables();
     this -> initWindow();
+    this->initBackground();
     this->initEnemies();
 }
 
@@ -20,6 +21,14 @@ void Game::initWindow() {
     this -> _window = new sf::RenderWindow
             (sf::VideoMode(400, 400), "Basic SFML Dungeon Game");// need game name
     this->_window->setFramerateLimit(60);
+
+}
+
+void Game::initBackground()
+{
+    static sf::Texture backgroundTexture = loadTextures("../dungeon_floor.png");
+    _background.setTexture(backgroundTexture);
+    this->_window->draw(this->_background);
 }
 
 //Private function
@@ -63,6 +72,7 @@ void Game::update() {
 void Game::render() {
     this->_window->clear();
     //draw objects here
+    this->_window->draw(this->_background);
     this->_window->draw(this->_enemy);
     this->_window->display();
 }

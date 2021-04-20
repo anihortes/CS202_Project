@@ -32,10 +32,12 @@ private:
     //game objects
     //sf::RectangleShape _enemy;
     sf::Sprite _enemy;
+    sf::Sprite _background;
 
     //private functions
     void initVariables();
     void initWindow();
+    void initBackground();
     void initEnemies();
     sf::Texture loadTextures(std::string name);
 };
