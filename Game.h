@@ -30,12 +30,14 @@ private:
     sf::Event _ev;
 
     //game objects
-    sf::RectangleShape _enemy;
+    //sf::RectangleShape _enemy;
+    sf::Sprite _enemy;
 
     //private functions
     void initVariables();
     void initWindow();
     void initEnemies();
+    sf::Texture loadTextures(std::string name);
 };
 
 

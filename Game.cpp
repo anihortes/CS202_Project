@@ -18,7 +18,7 @@ Game::~Game(){
 //Private function
 void Game::initWindow() {
     this -> _window = new sf::RenderWindow
-            (sf::VideoMode(400, 400), "SFML window");
+            (sf::VideoMode(400, 400), "Basic SFML Dungeon Game");// need game name
     this->_window->setFramerateLimit(60);
 }
 
@@ -48,7 +48,10 @@ void Game::pollEvents() {
 
 //under the hood logic and where things are
 void Game::update() {
+    //players turn
     this -> pollEvents();
+    //enemy turn
+
 
 }
 
@@ -65,10 +68,27 @@ void Game::render() {
 }
 
 void Game::initEnemies() {
+    //this->_enemy.setPosition(1.f,20.f);
+    //this->_enemy.setSize(sf::Vector2f(100.f,100.f));
+    //this->_enemy.setScale(sf::Vector2f(0.5f,0.5f));
+    //this->_enemy.setFillColor(sf::Color::Cyan);
+    //this->_enemy.setOutlineColor(sf::Color::Blue);
+    //this->_enemy.setOutlineThickness(2.f);
+
+    //load texture/sprite
+    static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
+    _enemy.setTexture(enemy1Texture);
     this->_enemy.setPosition(1.f,20.f);
-    this->_enemy.setSize(sf::Vector2f(100.f,100.f));
-    this->_enemy.setScale(sf::Vector2f(0.5f,0.5f));
-    this->_enemy.setFillColor(sf::Color::Cyan);
-    this->_enemy.setOutlineColor(sf::Color::Blue);
-    this->_enemy.setOutlineThickness(2.f);
+    this->_enemy.setScale(sf::Vector2f(4.0f,4.0f));
+
+}
+
+sf::Texture Game::loadTextures(std::string name){
+
+    sf::Texture texture;
+    if (!texture.loadFromFile(name))
+    {
+        std::cout << "Texture load Failed!" << std::endl;
+    }
+    return texture;
 }

@@ -32,6 +32,8 @@ public:
     sf::RectangleShape myRect;
 };
 
+
+
 int main() {
     //make game initializer
     Game game;
