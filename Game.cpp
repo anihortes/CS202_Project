@@ -98,22 +98,22 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    std::cout << " player health: " << pHealth << std::endl;
                     // since collision detection wasn't working with the enemy, I got rid of it entirely
                     if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,-move_dist,0)){
                         if(spritePosition == 1){
                             this->_player.scale(-spritePosition, 1);
-                            //this->_player.move(46,0);
+                            //this->_player.move(46,0); this breaks checking the border.
                             spritePosition=-1;
                         }
                         this->_player.move(-move_dist, 0.f);
                     }
-                    else{pHealth -=2;}
+                    else{
+                        pHealth -=2;
+                        std::cout << " player health: " << pHealth << std::endl;
+                    }
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Right)
                 {
-                    std::cout << " player health: " << pHealth << std::endl;
-
                     if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,move_dist,0)){
                         if(spritePosition == -1){
                             this->_player.scale(-1, 1);
@@ -122,28 +122,31 @@ void Game::pollEvents() {
                         }
                         this->_player.move(move_dist, 0.f);
                     }
-                    else{pHealth -=2;}
+                    else{
+                        pHealth -=2;
+                        std::cout << " player health: " << pHealth << std::endl;
+                    }
 
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Down)
                 {
-                    std::cout << " player health: " << pHealth << std::endl;
-
                     if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,0,move_dist)){
                         this->_player.move(0.f, move_dist);
                     }
-                    else{pHealth -=2;}
-
+                    else{
+                        pHealth -=2;
+                        std::cout << " player health: " << pHealth << std::endl;
+                    }
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Up)
                 {
-                    std::cout << " player health: "<< pHealth << std::endl;
-
                     if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,0,-move_dist)){
                         this->_player.move(0.f, -move_dist);
                     }
-                    else{pHealth -=2;}
-
+                    else{
+                        pHealth -=2;
+                        std::cout << " player health: " << pHealth << std::endl;
+                    }
                 }
         }
     }
@@ -210,7 +213,6 @@ void Game::enemiesLogic()
     for (auto &e : this-> enemies)
     {
         //for the x positions
-        // I assume this is supposed to keep the enemy on screen, but doesn't because enemy pixels > scale.
         if (e.getPosition().x < 0 + 10*this->_enemy.getScale().x)
         {
             e.move(rand() % enemyDist, 0);
@@ -276,4 +278,5 @@ void Game::initPlayer(){
     this->_player.setPosition(px,py);
     this->_player.setScale(sf::Vector2f(2.0f,2.0f));
 
+    std::cout << " player health: " << pHealth << std::endl;
 }
