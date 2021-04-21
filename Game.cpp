@@ -76,8 +76,9 @@ void Game::pollEvents() {
     //std::cout << "sprite: " << this->_enemy.getPosition().x << std::endl;
 
     while(this -> _window -> pollEvent(this->_ev)){
-        if(eHealth<1)
+        if(this->kills>10)
         {
+            std::cout << "YOU WIN!" << std::endl;
             // instead of closing should give a player wins screen
             this->_window->close();
             break;
