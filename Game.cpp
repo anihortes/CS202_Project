@@ -4,8 +4,8 @@
 
 #include "Game.h"
 Game::Game(){
-    this -> initVariables();
-    this -> initWindow();
+    this->initVariables();
+    this->initWindow();
     this->initBackground();
     this->initEnemies();
     this->initPlayer();
@@ -14,8 +14,6 @@ Game::Game(){
 Game::~Game(){
     delete this -> _window;
 }
-
-
 
 //Private function
 void Game::initWindow() {
@@ -81,7 +79,9 @@ void Game::pollEvents() {
                     }
                     else{
                         // otherwise move. There should be an enemy move thing and a limiter to the screen;
-                        this->px-=9*this->tile_size;
+
+                            this->px -= 9*this->tile_size;
+
                         this->_player.setPosition(px,py);
                     }
                 }
