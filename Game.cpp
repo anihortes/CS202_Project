@@ -3,6 +3,9 @@
 //
 
 #include "Game.h"
+#include <cmath>
+int spritePosition = 1;
+
 Game::Game(){
     this->initVariables();
     this->initWindow();
@@ -42,6 +45,7 @@ const bool Game::running() const {
 }
 
 void Game::pollEvents() {
+    //std::cout << "sprite: " << this->_player.getTexture()->getSize().y << std::endl;
     while(this -> _window -> pollEvent(this->_ev)){
         if(eHealth<1)
         {
@@ -67,11 +71,15 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    if(px - ex < 50 && py - ey < 70)
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
+
+                    if(abs(px - ex) < 4*16 && abs(py-ey) < 4*16)
                     {
                         // if players interact, combat
                         this->pHealth -= 5;
                         this->eHealth -= 3;
+                        this->ex -= this->tile_size;
+                        this->_enemy.setPosition(ex, ey);
                     }
                     else if(px < 20){
                         //write "*bonk*" to the screen
@@ -79,62 +87,87 @@ void Game::pollEvents() {
                     }
                     else{
                         // otherwise move. There should be an enemy move thing and a limiter to the screen;
-
-                            this->px -= 9*this->tile_size;
-
-                        this->_player.setPosition(px,py);
+                        if(spritePosition == 1){
+                            this->_player.scale(-spritePosition, 1);
+                            spritePosition=-1;
+                            this->px+=20+this->tile_size;
+                            this->_player.setPosition(px,py);
+                        }
+                        else {
+                            this->px -= this->tile_size;
+                            this->_player.setPosition(px, py);
+                        }
                     }
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Right)
                 {
-                    /* With current setup, can't attack enemy by moving right
-                    if(px - ex > -50 and py - ey < 70)
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
+
+                    //With current setup, can't attack enemy by moving right
+                    if(abs(px - ex) < 2*23 && abs(py-ey) < 4*16)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
+                        this->ex += this->tile_size;
+                        this->_enemy.setPosition(ex, ey);
                     }
-                    else */if(px > 750){
+                    else if(px > 750){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
                     else{
-                        this->px+=9*this->tile_size;
-                        this->_player.setPosition(px,py);
-                        this->_enemy.setPosition(ex,ey);
+                        if(spritePosition == -1){
+                            this->_player.scale(-1, 1);
+                            spritePosition = 1;
+                            this->px-=20+this->tile_size;
+                            this->_player.setPosition(px,py);
+                        }
+                        else {
+                            this->px += this->tile_size;
+                            this->_player.setPosition(px, py);
+                        }
                     }
 
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Down)
                 {
-                    /* with current setup, can't attack enemy by moving down
-                    if(abs(px - ex) < 50 and abs(py - ey) < 50)
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
+
+                    //with current setup, can't attack enemy by moving down
+                    if(abs(py - ey) < 2*47 && abs(px-ex) < 2*23)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
+                        this->ey+=this->tile_size;
+                        this->_enemy.setPosition(ex,ey);
                     }
-                    else */if(py > 500){
+                    else if(py > 500){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
                     else{
-                        this->py+=9*this->tile_size;
+                        this->py+=this->tile_size;
                         this->_player.setPosition(px,py);
                     }
 
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Up)
                 {
-                    if(px - ex < 50 && py - ey < 70)
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
+
+                    if(abs(py - ey) < 4*16 && abs(px-ex) < 2*23)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
+                        this->ey-=this->tile_size;
+                        this->_enemy.setPosition(ex,ey);
                     }
                     else if(py < 20){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
                     else{
-                        this->py-=9*this->tile_size;
+                        this->py-=this->tile_size;
                         this->_player.setPosition(px,py);
                     }
 
@@ -167,8 +200,8 @@ void Game::render() {
 }
 
 void Game::initEnemies() {
-    this->ex = 1.f;
-    this->ey = 20.f;
+    this->ex = 300.f;
+    this->ey = 300.f;
     static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
     _enemy.setTexture(enemy1Texture);
     this->_enemy.setPosition(ex,ey);
@@ -189,8 +222,8 @@ sf::Texture Game::loadTextures(std::string name){
 void Game::initPlayer(){
     static sf::Texture playerTexture = loadTextures("../man.png");
     _player.setTexture(playerTexture);
-    this->px = 100.f;
-    this->py = 200.f;
+    this->px = 200.f;
+    this->py = 300.f;
     this->_player.setPosition(px,py);
     this->_player.setScale(sf::Vector2f(2.0f,2.0f));
 
