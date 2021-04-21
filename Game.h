@@ -21,11 +21,13 @@ public:
 
     const bool running() const;
 
+    bool checkBorder(int x,int y, int dx, int dy);
+
     void pollEvents();
     void update();
     void render();
 
-
+    int move_dist = 10.f;
 
 private:
     sf::RenderWindow *_window;
@@ -34,27 +36,13 @@ private:
     //game objects
     //sf::RectangleShape _enemy;
     sf::Sprite _background;
-    /*
-    class Player_Character(){
-        public:
-        Player_Character():x_location(0),y_location(0){};
 
-        //move_player(sf::Event ev){}
-        sf::Sprite _player = loadTextures("../enemy1.png");
-
-
-        int x_location;
-        int y_location;
-        private:
-    }
-*/
     sf::Sprite _player;
     void initPlayer();
     int px;
     int py;
     int ex;
     int ey;
-    int tile_size = 10;
     int pHealth = 100;
     int eHealth = 50;
 
