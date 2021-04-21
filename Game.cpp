@@ -75,7 +75,7 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    std::cout << "X-space diff: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << "player health: " << pHealth << std::endl;
+                    std::cout << "X-space diff: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << " player health: " << pHealth << std::endl;
                     if(ex - px < 40 && abs(py-ey) < 80)
                     {
                         // if players interact, combat
@@ -94,17 +94,21 @@ void Game::pollEvents() {
                             this->_player.scale(-spritePosition, 1);
                             spritePosition=-1;
 
-                            this->_player.move(23,0);
+                            //this->_player.move(23,0);
                         }
                         else {
-                            this->px -= this->tile_size;
-                            this->_player.setPosition(px, py);
+                            //this->px -= this->tile_size; // this line of code broke player's movement
+                            if (_player.getPosition().x > 0 + this->_player.getScale().x)
+                            {
+                                this->_player.move(-5.f, 0.f);
+                            }
+                            
                         }
                     }
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Right)
                 {
-                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << "player health: " << pHealth << std::endl;
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << " player health: " << pHealth << std::endl;
 
                     if(ex - px < 40 && abs(py-ey) < 50)
                     {
@@ -127,15 +131,15 @@ void Game::pollEvents() {
                         }
                         //else just move
                         else {
-                            this->px += this->tile_size;
-                            this->_player.setPosition(px, py);
+                           // this->px += this->tile_size; // this line of code broke player's movement
+                            this->_player.move(5.f, 0.f);
                         }
                     }
 
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Down)
                 {
-                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << "player health: " << pHealth << std::endl;
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << " player health: " << pHealth << std::endl;
                     //std::cout << py << "  " << ey << std::endl;
                     //with current setup, can't attack enemy by moving down
                     if(ey - py < 50 && abs(px-ex)<40)
@@ -150,15 +154,15 @@ void Game::pollEvents() {
                         this->pHealth -= 2;
                     }
                     else{
-                        this->py+=this->tile_size;
-                        this->_player.setPosition(px,py);
+                        //this->py+=this->tile_size; // this line of code broke player's movement
+                        this->_player.move(0.f, 5.f);
                     }
 
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Up)
                 {
                     std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << 
-                        "player health: "<< pHealth << std::endl;
+                        " player health: "<< pHealth << std::endl;
 
                     if(py - ey < 50 && abs(px-ex) < 40)
                     {
@@ -172,8 +176,8 @@ void Game::pollEvents() {
                         this->pHealth -= 2;
                     }
                     else{
-                        this->py-=this->tile_size;
-                        this->_player.setPosition(px,py);
+                        //this->py-=this->tile_size; // this line of code broke player's movement
+                        this->_player.move(0.f,-5.f);
                     }
 
                 }
@@ -245,26 +249,26 @@ void Game::enemiesLogic()
         if (e.getPosition().x < 0 + this->_enemy.getScale().x)
         {
             e.move(rand() % enemyDist, 0);
-            std::cout << "worked[1]" << std::endl;
+            //std::cout << "worked[1]" << std::endl;
         }
         
         else if (e.getPosition().x > this->_window->getSize().x - this->_enemy.getScale().x)
         {
             e.move(-(rand() % enemyDist), 0);
-            std::cout << "worked[2]" << std::endl;
+            ///std::cout << "worked[2]" << std::endl;
         }
 
         //for the y positions
         else if (e.getPosition().y < 0 + this->_enemy.getScale().y)
         {
             e.move(0 , rand() % enemyDist);
-            std::cout << "worked[3]" << std::endl;
+            //std::cout << "worked[3]" << std::endl;
         }
 
         else if (e.getPosition().y > this->_window->getSize().y - this->_enemy.getScale().y)
         {
             e.move(0 , -(rand() % enemyDist));
-            std::cout << "worked[4]" << std::endl;
+            //std::cout << "worked[4]" << std::endl;
         }
         //for x and y positions
         else
@@ -272,7 +276,7 @@ void Game::enemiesLogic()
             e.move(rand() % 19 + (-9), rand() % 19 + (-9));
         }
 
-        std::cout << e.getPosition().x << " , " << e.getPosition().y << std::endl;
+        //std::cout << e.getPosition().x << " , " << e.getPosition().y << std::endl;
     }
 }
 
