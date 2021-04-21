@@ -69,7 +69,7 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    if(px - ex < 50 and py - ey < 70)
+                    if(px - ex < 50 && py - ey < 70)
                     {
                         // if players interact, combat
                         this->pHealth -= 5;
@@ -81,7 +81,7 @@ void Game::pollEvents() {
                     }
                     else{
                         // otherwise move. There should be an enemy move thing and a limiter to the screen;
-                        this->px-=this->tile_size;
+                        this->px-=9*this->tile_size;
                         this->_player.setPosition(px,py);
                     }
                 }
@@ -98,8 +98,9 @@ void Game::pollEvents() {
                         this->pHealth -= 2;
                     }
                     else{
-                        this->px+=this->tile_size;
+                        this->px+=9*this->tile_size;
                         this->_player.setPosition(px,py);
+                        this->_enemy.setPosition(ex,ey);
                     }
 
                 }
@@ -116,14 +117,14 @@ void Game::pollEvents() {
                         this->pHealth -= 2;
                     }
                     else{
-                        this->py+=this->tile_size;
+                        this->py+=9*this->tile_size;
                         this->_player.setPosition(px,py);
                     }
 
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Up)
                 {
-                    if(px - ex < 50 and py - ey < 70)
+                    if(px - ex < 50 && py - ey < 70)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
@@ -133,7 +134,7 @@ void Game::pollEvents() {
                         this->pHealth -= 2;
                     }
                     else{
-                        this->py-=this->tile_size;
+                        this->py-=9*this->tile_size;
                         this->_player.setPosition(px,py);
                     }
 
@@ -166,14 +167,6 @@ void Game::render() {
 }
 
 void Game::initEnemies() {
-    //this->_enemy.setPosition(1.f,20.f);
-    //this->_enemy.setSize(sf::Vector2f(100.f,100.f));
-    //this->_enemy.setScale(sf::Vector2f(0.5f,0.5f));
-    //this->_enemy.setFillColor(sf::Color::Cyan);
-    //this->_enemy.setOutlineColor(sf::Color::Blue);
-    //this->_enemy.setOutlineThickness(2.f);
-
-    //load texture/sprite
     this->ex = 1.f;
     this->ey = 20.f;
     static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
