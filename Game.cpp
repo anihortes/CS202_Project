@@ -42,6 +42,7 @@ const bool Game::running() const {
 }
 
 void Game::pollEvents() {
+    int passedEvents = 0;
     while(this -> _window -> pollEvent(this->_ev)){
         if(eHealth<1)
         {
@@ -67,7 +68,7 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    if(px - ex < 50 && py - ey < 70)
+                    if(px - ex < (50+8*tile_size) and py - ey < 70)
                     {
                         // if players interact, combat
                         this->pHealth -= 5;
@@ -93,7 +94,7 @@ void Game::pollEvents() {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
                     }
-                    else */if(px > 750){
+                    else */if(px > (750-8*this->tile_size)){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
@@ -112,7 +113,7 @@ void Game::pollEvents() {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
                     }
-                    else */if(py > 500){
+                    else */if(py > (500-8*tile_size)){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
@@ -124,12 +125,12 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Up)
                 {
-                    if(px - ex < 50 && py - ey < 70)
+                    if(px - ex < 50 && py - ey < (70+8*tile_size))
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
                     }
-                    else if(py < 20){
+                    else if(py < (20+ 8*tile_size)){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
@@ -195,3 +196,4 @@ void Game::initPlayer(){
     this->_player.setScale(sf::Vector2f(2.0f,2.0f));
 
 }
+
