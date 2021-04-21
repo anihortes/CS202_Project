@@ -69,7 +69,7 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    if(abs(px - ex) < 50 and abs(py - ey) < 50)
+                    if(px - ex < 50 and py - ey < 70)
                     {
                         // if players interact, combat
                         this->pHealth -= 5;
@@ -87,12 +87,13 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Right)
                 {
-                    if(abs(px - ex) < 50 and abs(py - ey) < 50)
+                    /* With current setup, can't attack enemy by moving right
+                    if(px - ex > -50 and py - ey < 70)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
                     }
-                    else if(px > 750){
+                    else */if(px > 750){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
@@ -104,12 +105,13 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Down)
                 {
+                    /* with current setup, can't attack enemy by moving down
                     if(abs(px - ex) < 50 and abs(py - ey) < 50)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
                     }
-                    else if(py > 500){
+                    else */if(py > 500){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
@@ -121,7 +123,7 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Up)
                 {
-                    if(abs(px - ex) < 50 and abs(py - ey) < 50)
+                    if(px - ex < 50 and py - ey < 70)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
