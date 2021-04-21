@@ -35,6 +35,9 @@ public:
 
 
 int main() {
+    //makes rand number
+    std::srand(static_cast<unsigned>(time(NULL)));
+
     //make game initializer
     Game game;
 

@@ -7,6 +7,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include <ctime>
+#include <vector>
 
 #ifndef CS202_PROJECT_GAME_H
 #define CS202_PROJECT_GAME_H
@@ -31,7 +33,6 @@ private:
 
     //game objects
     //sf::RectangleShape _enemy;
-    sf::Sprite _enemy;
     sf::Sprite _background;
     /*
     class Player_Character(){
@@ -57,11 +58,27 @@ private:
     int pHealth = 100;
     int eHealth = 50;
 
+
+    //enemies
+    std::vector<sf::Sprite> enemies;
+    sf::Sprite _enemy;
+    int enemyAmount;
+    int maxEnemies;
+    int kills;
+
     //private functions
     void initVariables();
     void initWindow();
     void initBackground();
-    void initEnemies();
+
+
+    //void initEnemies();
+    void spawnEnemies();
+    void enemiesLogic();
+    void renderEnemies();
+
+
+
     sf::Texture loadTextures(std::string name);
 };
 

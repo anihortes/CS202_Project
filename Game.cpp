@@ -10,7 +10,7 @@ Game::Game(){
     this->initVariables();
     this->initWindow();
     this->initBackground();
-    this->initEnemies();
+    //this->initEnemies();
     this->initPlayer();
 }
 
@@ -37,6 +37,10 @@ void Game::initBackground()
 //Private function
 void Game::initVariables() {
     this -> _window = nullptr;
+    
+    this->kills = 0;
+    this->maxEnemies = 3;
+    this -> enemyAmount = 0;
 
 }
 
@@ -182,6 +186,7 @@ void Game::update() {
     this -> pollEvents();
     //enemy turn
 
+    this->enemiesLogic();
 
 }
 
@@ -194,19 +199,55 @@ void Game::render() {
     this->_window->clear();
     //draw objects here
     this->_window->draw(this->_background);
-    this->_window->draw(this->_enemy);
+    this->renderEnemies();
+   // this->_window->draw(this->_enemy);
     this->_window->draw(this->_player);
     this->_window->display();
 }
 
-void Game::initEnemies() {
-    this->ex = 300.f;
-    this->ey = 300.f;
-    static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
-    _enemy.setTexture(enemy1Texture);
-    this->_enemy.setPosition(ex,ey);
-    this->_enemy.setScale(sf::Vector2f(4.0f,4.0f));
+//void Game::initEnemies() {
+//    this->ex = 300.f;
+//    this->ey = 300.f;
+//    static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
+//    _enemy.setTexture(enemy1Texture);
+//    this->_enemy.setPosition(ex,ey);
+//    this->_enemy.setScale(sf::Vector2f(4.0f,4.0f));
+//
+//}
 
+void Game::spawnEnemies()
+{
+    this->_enemy.setPosition(
+       static_cast<float>( rand() % static_cast<int>(this->_window->getSize().x + this->_enemy.getScale().x)),
+       static_cast<float>( rand() % static_cast<int>(this->_window->getSize().y + this->_enemy.getScale().y))
+    );
+
+    static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
+    this->_enemy.setTexture(enemy1Texture);
+
+    this->enemies.push_back(this->_enemy);
+}
+
+void Game::enemiesLogic()
+{
+    if (this->enemyAmount < this->maxEnemies)
+    {
+        this->spawnEnemies();
+        enemyAmount++;//might want to spawn batches of enemys
+    }
+
+    for (auto &e : this-> enemies)
+    {
+        e.move(0.f, 5.f);
+    }
+}
+
+void Game::renderEnemies()
+{
+    for (auto& e : this-> enemies)
+    {
+        this->_window->draw(e);
+    }
 }
 
 sf::Texture Game::loadTextures(std::string name){
