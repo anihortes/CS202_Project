@@ -72,7 +72,7 @@ private:
     void initBackground();
 
 
-    //void initEnemies();
+    void initEnemies();
     void spawnEnemies();
     void enemiesLogic();
     void renderEnemies();

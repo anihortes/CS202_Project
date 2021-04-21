@@ -10,7 +10,7 @@ Game::Game(){
     this->initVariables();
     this->initWindow();
     this->initBackground();
-    //this->initEnemies();
+    this->initEnemies();
     this->initPlayer();
 }
 
@@ -39,7 +39,7 @@ void Game::initVariables() {
     this -> _window = nullptr;
     
     this->kills = 0;
-    this->maxEnemies = 3;
+    this->maxEnemies = 5;
     this -> enemyAmount = 0;
 
 }
@@ -75,7 +75,7 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    std::cout << "X-space diff: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
+                    std::cout << "X-space diff: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << "player health: " << pHealth << std::endl;
                     if(ex - px < 40 && abs(py-ey) < 80)
                     {
                         // if players interact, combat
@@ -104,7 +104,7 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Right)
                 {
-                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << "player health: " << pHealth << std::endl;
 
                     if(ex - px < 40 && abs(py-ey) < 50)
                     {
@@ -135,8 +135,8 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Down)
                 {
-                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
-                    std::cout << py << "  " << ey << std::endl;
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << "player health: " << pHealth << std::endl;
+                    //std::cout << py << "  " << ey << std::endl;
                     //with current setup, can't attack enemy by moving down
                     if(ey - py < 50 && abs(px-ex)<40)
                     {
@@ -157,7 +157,8 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Up)
                 {
-                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
+                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << 
+                        "player health: "<< pHealth << std::endl;
 
                     if(py - ey < 50 && abs(px-ex) < 40)
                     {
@@ -205,20 +206,20 @@ void Game::render() {
     this->_window->display();
 }
 
-//void Game::initEnemies() {
-//    this->ex = 300.f;
-//    this->ey = 300.f;
-//    static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
-//    _enemy.setTexture(enemy1Texture);
-//    this->_enemy.setPosition(ex,ey);
-//    this->_enemy.setScale(sf::Vector2f(4.0f,4.0f));
-//
-//}
+void Game::initEnemies() {
+    this->ex = 300.f;
+    this->ey = 300.f;
+    static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
+    _enemy.setTexture(enemy1Texture);
+    this->_enemy.setPosition(ex,ey);
+    this->_enemy.setScale(sf::Vector2f(4.0f,4.0f));
+
+}
 
 void Game::spawnEnemies()
 {
     this->_enemy.setPosition(
-       static_cast<float>( rand() % static_cast<int>(this->_window->getSize().x + this->_enemy.getScale().x)),
+       static_cast<float>( rand() % static_cast<int>(this->_window->getSize().x - this->_enemy.getScale().x)),
        static_cast<float>( rand() % static_cast<int>(this->_window->getSize().y + this->_enemy.getScale().y))
     );
 
@@ -236,9 +237,10 @@ void Game::enemiesLogic()
         enemyAmount++;//might want to spawn batches of enemys
     }
 
-    for (auto &e : this-> enemies)
+    //this is the logic for enemy movemenet
+    for (auto &e : this-> enemies) 
     {
-        e.move(0.f, 5.f);
+        e.move(1.f, 1.f);
     }
 }
 
