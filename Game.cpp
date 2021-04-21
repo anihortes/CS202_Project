@@ -39,7 +39,7 @@ void Game::initVariables() {
     this -> _window = nullptr;
     
     this->kills = 0;
-    this->maxEnemies = 5;
+    this->maxEnemies = 6;
     this -> enemyAmount = 0;
 
 }
@@ -207,11 +207,11 @@ void Game::render() {
 }
 
 void Game::initEnemies() {
-    this->ex = 300.f;
-    this->ey = 300.f;
+    //this->ex = 300.f;
+    //this->ey = 300.f;
     static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
     _enemy.setTexture(enemy1Texture);
-    this->_enemy.setPosition(ex,ey);
+    //this->_enemy.setPosition(ex,ey);
     this->_enemy.setScale(sf::Vector2f(4.0f,4.0f));
 
 }
@@ -219,7 +219,7 @@ void Game::initEnemies() {
 void Game::spawnEnemies()
 {
     this->_enemy.setPosition(
-       static_cast<float>( rand() % static_cast<int>(this->_window->getSize().x - this->_enemy.getScale().x)),
+       static_cast<float>( rand() % static_cast<int>(this->_window->getSize().x + this->_enemy.getScale().x)),
        static_cast<float>( rand() % static_cast<int>(this->_window->getSize().y + this->_enemy.getScale().y))
     );
 
@@ -237,10 +237,42 @@ void Game::enemiesLogic()
         enemyAmount++;//might want to spawn batches of enemys
     }
 
+    int enemyDist = 10;
     //this is the logic for enemy movemenet
     for (auto &e : this-> enemies) 
     {
-        e.move(1.f, 1.f);
+        //for the x positions
+        if (e.getPosition().x < 0 + this->_enemy.getScale().x)
+        {
+            e.move(rand() % enemyDist, 0);
+            std::cout << "worked[1]" << std::endl;
+        }
+        
+        else if (e.getPosition().x > this->_window->getSize().x - this->_enemy.getScale().x)
+        {
+            e.move(-(rand() % enemyDist), 0);
+            std::cout << "worked[2]" << std::endl;
+        }
+
+        //for the y positions
+        else if (e.getPosition().y < 0 + this->_enemy.getScale().y)
+        {
+            e.move(0 , rand() % enemyDist);
+            std::cout << "worked[3]" << std::endl;
+        }
+
+        else if (e.getPosition().y > this->_window->getSize().y - this->_enemy.getScale().y)
+        {
+            e.move(0 , -(rand() % enemyDist));
+            std::cout << "worked[4]" << std::endl;
+        }
+        //for x and y positions
+        else
+        {
+            e.move(rand() % 19 + (-9), rand() % 19 + (-9));
+        }
+
+        std::cout << e.getPosition().x << " , " << e.getPosition().y << std::endl;
     }
 }
 
