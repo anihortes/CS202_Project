@@ -48,8 +48,6 @@ private:
     void initPlayer();
     int px;
     int py;
-    int ex;
-    int ey;
     int pHealth = 100;
     int eHealth = 50;
 
@@ -57,7 +55,7 @@ private:
 
     //enemies
     std::vector<Enemy> _enemies;
-    std::vector<sf::Sprite> enemies;
+    //std::vector<sf::Sprite> enemies;
     sf::Sprite _enemy;
     int enemyAmount;
     int maxEnemies;

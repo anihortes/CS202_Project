@@ -255,8 +255,8 @@ void Game::enemiesLogic()
             e.y = e.appearance.getPosition().y;
         }
 
-        // kills enemies on contact with player. not sure how to unexist enemy once dead though.
-        if (abs(e.y - _player.getPosition().y) < 40 && abs(e.x - _player.getPosition().x) < 20){
+        // damages enemies on contact with player.
+        if (abs(e.y - _player.getPosition().y) < 60 && abs(e.x - _player.getPosition().x) < 40){
             if (e.health > 0)
             {
                 e.health -=1;
@@ -265,7 +265,8 @@ void Game::enemiesLogic()
             else if(e.health == 0){
                 this->kills += 1;
                 std::cout << this->kills << " kills" << std::endl;
-                e.health = -1;
+                _enemies.erase(begin(_enemies)+(enemynum-1));
+                this->enemyAmount--;
             }
         }
 
