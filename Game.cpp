@@ -45,7 +45,7 @@ const bool Game::running() const {
 }
 
 void Game::pollEvents() {
-    //std::cout << "sprite: " << this->_player.getTexture()->getSize().y << std::endl;
+    //std::cout << "sprite: " << this->_enemy.getPosition().x << std::endl;
     while(this -> _window -> pollEvent(this->_ev)){
         if(eHealth<1)
         {
@@ -71,15 +71,14 @@ void Game::pollEvents() {
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
-
-                    if(abs(px - ex) < 4*16 && abs(py-ey) < 4*16)
+                    std::cout << "X-space diff: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
+                    if(ex - px < 40 && abs(py-ey) < 80)
                     {
                         // if players interact, combat
                         this->pHealth -= 5;
                         this->eHealth -= 3;
-                        this->ex -= this->tile_size;
-                        this->_enemy.setPosition(ex, ey);
+                        this->ey += 50;
+                        this->_enemy.move(0, 50);
                     }
                     else if(px < 20){
                         //write "*bonk*" to the screen
@@ -90,8 +89,8 @@ void Game::pollEvents() {
                         if(spritePosition == 1){
                             this->_player.scale(-spritePosition, 1);
                             spritePosition=-1;
-                            this->px+=20+this->tile_size;
-                            this->_player.setPosition(px,py);
+
+                            this->_player.move(23,0);
                         }
                         else {
                             this->px -= this->tile_size;
@@ -103,25 +102,26 @@ void Game::pollEvents() {
                 {
                     std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
 
-                    //With current setup, can't attack enemy by moving right
-                    if(abs(px - ex) < 2*23 && abs(py-ey) < 4*16)
+                    if(ex - px < 40 && abs(py-ey) < 50)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
-                        this->ex += this->tile_size;
-                        this->_enemy.setPosition(ex, ey);
+                        ey -= 50;
+                        this->_enemy.move(0, -50);
                     }
                     else if(px > 750){
                         //write "*bonk*" to the screen
                         this->pHealth -= 2;
                     }
                     else{
+                        //flips player sprite left or right when they move
                         if(spritePosition == -1){
                             this->_player.scale(-1, 1);
+                            this->_player.move(-23,0);
+
                             spritePosition = 1;
-                            this->px-=20+this->tile_size;
-                            this->_player.setPosition(px,py);
                         }
+                        //else just move
                         else {
                             this->px += this->tile_size;
                             this->_player.setPosition(px, py);
@@ -132,14 +132,14 @@ void Game::pollEvents() {
                 else if(this->_ev.key.code == sf::Keyboard::Down)
                 {
                     std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
-
+                    std::cout << py << "  " << ey << std::endl;
                     //with current setup, can't attack enemy by moving down
-                    if(abs(py - ey) < 2*47 && abs(px-ex) < 2*23)
+                    if(ey - py < 50 && abs(px-ex)<40)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
-                        this->ey+=this->tile_size;
-                        this->_enemy.setPosition(ex,ey);
+                        this->ex += 10;
+                        this->_enemy.move(10,0);
                     }
                     else if(py > 500){
                         //write "*bonk*" to the screen
@@ -155,12 +155,12 @@ void Game::pollEvents() {
                 {
                     std::cout << "X-space diffX: " << abs(px-ex) << " Y-space diff: " << abs(py - ey) << std::endl;
 
-                    if(abs(py - ey) < 4*16 && abs(px-ex) < 2*23)
+                    if(py - ey < 50 && abs(px-ex) < 40)
                     {
                         this->pHealth -= 5;
                         this->eHealth -= 3;
-                        this->ey-=this->tile_size;
-                        this->_enemy.setPosition(ex,ey);
+                        this->ex -= 10;
+                        this->_enemy.move(-10,0);
                     }
                     else if(py < 20){
                         //write "*bonk*" to the screen
