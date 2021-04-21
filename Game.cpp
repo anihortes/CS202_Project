@@ -20,6 +20,8 @@ bool enemyCollision(int playerX,int playerY,int enemyX, int enemyY){
 };
 */
 
+Game::Enemy::Enemy(int x0, int y0, int ehealth):x(x0),y(y0),health(ehealth){}
+
 bool Game::checkBorder(int x, int y, int dx, int dy) {
     x+=dx;
     y+=dy;
@@ -195,9 +197,14 @@ void Game::spawnEnemies()
     );
 
     static sf::Texture enemy1Texture = loadTextures("../enemy1.png");
-    this->_enemy.setTexture(enemy1Texture);
+    //this->_enemy.setTexture(enemy1Texture);
+    //this->enemies.push_back(this->_enemy);
 
-    this->enemies.push_back(this->_enemy);
+    Enemy _e(_enemy.getPosition().x,_enemy.getPosition().y,this->eHealth);
+    _e.appearance.setScale(sf::Vector2f(4.0f,4.0f));
+    _e.appearance.setPosition(_e.x,_e.y);
+    _e.appearance.setTexture(enemy1Texture);
+    this->_enemies.push_back(_e);
 }
 
 void Game::enemiesLogic()
@@ -210,43 +217,57 @@ void Game::enemiesLogic()
 
     int enemyDist = 10;
     //this is the logic for enemy movemenet
-    for (auto &e : this-> enemies)
+    int enemynum = 0;
+    for (auto &e : this-> _enemies)
     {
+        ++enemynum;
+
         //for the x positions
-        if (e.getPosition().x < 0 + 10*this->_enemy.getScale().x)
+        if (e.appearance.getPosition().x < 0 + 10*this->_enemy.getScale().x)
         {
-            e.move(rand() % enemyDist, 0);
-            //std::cout << "worked[1]" << std::endl;
+            e.appearance.move(rand() % enemyDist, 0);
+            e.x = e.appearance.getPosition().x;
         }
 
-        else if (e.getPosition().x > this->_window->getSize().x - 10*this->_enemy.getScale().x)
+        else if (e.appearance.getPosition().x > this->_window->getSize().x - 10*this->_enemy.getScale().x)
         {
-            e.move(-(rand() % enemyDist), 0);
-            ///std::cout << "worked[2]" << std::endl;
+            e.appearance.move(-(rand() % enemyDist), 0);
+            e.x = e.appearance.getPosition().x;
         }
 
         //for the y positions
-        else if (e.getPosition().y < 0 + 10*this->_enemy.getScale().y)
+        else if (e.appearance.getPosition().y < 0 + 10*this->_enemy.getScale().y)
         {
-            e.move(0 , rand() % enemyDist);
-            //std::cout << "worked[3]" << std::endl;
+            e.appearance.move(0 , rand() % enemyDist);
+            e.y = e.appearance.getPosition().y;
         }
 
-        else if (e.getPosition().y > this->_window->getSize().y - 10*this->_enemy.getScale().y)
+        else if (e.appearance.getPosition().y > this->_window->getSize().y - 10*this->_enemy.getScale().y)
         {
-            e.move(0 , -(rand() % enemyDist));
-            //std::cout << "worked[4]" << std::endl;
+            e.appearance.move(0 , -(rand() % enemyDist));
+            e.y = e.appearance.getPosition().y;
         }
         //for x and y positions
         else
         {
-            e.move(rand() % 19 + (-9), rand() % 19 + (-9));
+            e.appearance.move(rand() % 19 + (-9), rand() % 19 + (-9));
+            e.x = e.appearance.getPosition().x;
+            e.y = e.appearance.getPosition().y;
         }
 
-        // kills enemies on contact with player. not sure how to do that though
-        //if (abs(e.getPosition().y - this->py) < 40 && abs(e.getPosition().x - this->px) < 20){
-        //    e.move(-1000,-1000);
-        //}
+        // kills enemies on contact with player. not sure how to unexist enemy once dead though.
+        if (abs(e.y - _player.getPosition().y) < 40 && abs(e.x - _player.getPosition().x) < 20){
+            if (e.health > 0)
+            {
+                e.health -=1;
+                std::cout << "enemy " << enemynum << " health" << e.health << std::endl;
+            }
+            else if(e.health == 0){
+                this->kills += 1;
+                std::cout << this->kills << " kills" << std::endl;
+                e.health = -1;
+            }
+        }
 
         //std::cout << e.getPosition().x << " , " << e.getPosition().y << std::endl;
     }
@@ -254,9 +275,9 @@ void Game::enemiesLogic()
 
 void Game::renderEnemies()
 {
-    for (auto& e : this-> enemies)
+    for (auto& e : this-> _enemies)
     {
-        this->_window->draw(e);
+        this->_window->draw(e.appearance);
     }
 }
 

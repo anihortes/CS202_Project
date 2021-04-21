@@ -27,6 +27,14 @@ public:
     void update();
     void render();
 
+    struct Enemy{
+        Enemy(int x0,int y0,int ehealth);
+        int x;
+        int y;
+        int health;
+        sf::Sprite appearance;
+    };
+
     int move_dist = 10.f;
 
 private:
@@ -34,7 +42,6 @@ private:
     sf::Event _ev;
 
     //game objects
-    //sf::RectangleShape _enemy;
     sf::Sprite _background;
 
     sf::Sprite _player;
@@ -47,7 +54,9 @@ private:
     int eHealth = 50;
 
 
+
     //enemies
+    std::vector<Enemy> _enemies;
     std::vector<sf::Sprite> enemies;
     sf::Sprite _enemy;
     int enemyAmount;
