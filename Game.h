@@ -3,8 +3,8 @@
 //
 #pragma once
 #include <iostream>
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <ctime>
@@ -36,6 +36,7 @@ public:
     };
 
     int move_dist = 10.f;
+    bool enemiesLogic();
 
 private:
     sf::RenderWindow *_window;
@@ -69,7 +70,6 @@ private:
 
     void initEnemies();
     void spawnEnemies();
-    void enemiesLogic();
     void renderEnemies();
 
 
