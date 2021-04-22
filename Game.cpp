@@ -6,30 +6,6 @@
 #include <cmath>
 int spritePosition = 1;
 
-/*
- * We really need to start getting combat and enemy collisions w||king.
-void combat(int playerHealth,int enemyHealth){
-    playerHealth -= 3;
-    enemyHealth -= 5;
-}
-
-bool enemyCollision(int playerX,int playerY,int enemyX, int enemyY){
-    f||(auto &e : enemies){
-        combat(pHealth,e.health);
-    }
-};
-*/
-
-Game::Enemy::Enemy(int x0, int y0, int ehealth):x(x0),y(y0),health(ehealth){}
-
-bool Game::checkBorder(int x, int y, int dx, int dy) {
-    x+=dx;
-    y+=dy;
-    // left right and bottom values aren't perfect, but pretty good.
-    if(x > 760 || x < 40 || y > 520 || y < 00){return false;}
-    else{return true;}
-}
-
 Game::Game(){
     this->initVariables();
     this->initWindow();
@@ -47,7 +23,6 @@ void Game::initWindow() {
     this -> _window = new sf::RenderWindow
             (sf::VideoMode(800, 600), "Dungeon Fight!");// need game name
     this->_window->setFramerateLimit(60);
-
 }
 
 void Game::initBackground()
@@ -55,7 +30,6 @@ void Game::initBackground()
     static sf::Texture backgroundTexture = loadTextures("../dungeon_floor.png");
     _background.setTexture(backgroundTexture);
     this->_background.setScale(sf::Vector2f(2.0f, 1.5f));
-
 }
 
 //Private function
@@ -65,26 +39,37 @@ void Game::initVariables() {
     this->kills = 0;
     this->maxEnemies = 6;
     this -> enemyAmount = 0;
-
 }
 
 const bool Game::running() const {
     return this -> _window -> isOpen();
 }
 
+//sprite flip on move left causes hitbox to not match sprite.
+//but moving to adjust causes error with border check
+void flipSprite(sf::Sprite &player, int &spritePosition,int move){
+    // if sprite not facing same direction as moving, flip sprite.
+    if(spritePosition != move){
+        spritePosition = move;
+        player.scale(-1, 1);
+    }
+};
 void Game::pollEvents() {
-    //std::cout << "sprite: " << this->_enemy.getPosition().x << std::endl;
-
     while(this -> _window -> pollEvent(this->_ev)){
-        if(this->kills>10)
+        // specify win condition, i.e. 10 kills
+        if(this->kills>9)
         {
+            // tells the player they won, then ends game.
             std::cout << "YOU WIN!" << std::endl;
             // instead of closing should give a player wins screen
             this->_window->close();
             break;
         }
+        // specify lose condition.
         else if(pHealth < 1)
         {
+            // prints Game Over and ends game.
+            std::cout << "How did you run into that many walls?!" << std::endl;
             // instead of closing, should give a game over screen
             this->_window->close();
             break;
@@ -99,58 +84,20 @@ void Game::pollEvents() {
                     this->_window->close();
                     break;
                 }
+                //on left or right click, player will flip to look and move in that direction
                 else if(this->_ev.key.code == sf::Keyboard::Left)
                 {
-                    // since collision detection wasn't w||king with the enemy, I got rid of it entirely
-                    if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,-move_dist,0)){
-                        if(spritePosition == 1){
-                            this->_player.scale(-spritePosition, 1);
-                            //this->_player.move(46,0); this breaks checking the b||der.
-                            spritePosition=-1;
-                        }
-                        this->_player.move(-move_dist, 0.f);
-                    }
-                    else{
-                        pHealth -=2;
-                        std::cout << " player health: " << pHealth << std::endl;
-                    }
+                    flipSprite(this->_player,spritePosition,-1);
+                    this->playerMove(-1,0);
                 }
                 else if(this->_ev.key.code == sf::Keyboard::Right)
                 {
-                    if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,move_dist,0)){
-                        if(spritePosition == -1){
-                            this->_player.scale(-1, 1);
-                            //this->_player.move(-46,0);
-                            spritePosition=1;
-                        }
-                        this->_player.move(move_dist, 0.f);
-                    }
-                    else{
-                        pHealth -=2;
-                        std::cout << " player health: " << pHealth << std::endl;
-                    }
-
+                    flipSprite(this->_player,spritePosition,1);
+                    this->playerMove(1,0);
                 }
-                else if(this->_ev.key.code == sf::Keyboard::Down)
-                {
-                    if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,0,move_dist)){
-                        this->_player.move(0.f, move_dist);
-                    }
-                    else{
-                        pHealth -=2;
-                        std::cout << " player health: " << pHealth << std::endl;
-                    }
-                }
-                else if(this->_ev.key.code == sf::Keyboard::Up)
-                {
-                    if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,0,-move_dist)){
-                        this->_player.move(0.f, -move_dist);
-                    }
-                    else{
-                        pHealth -=2;
-                        std::cout << " player health: " << pHealth << std::endl;
-                    }
-                }
+                // on up or down click, player will move in that direction.
+                else if(this->_ev.key.code == sf::Keyboard::Down){this->playerMove(0,1);}
+                else if(this->_ev.key.code == sf::Keyboard::Up){this->playerMove(0,-1);}
         }
     }
 }
@@ -179,6 +126,8 @@ void Game::render() {
     this->_window->draw(this->_player);
     this->_window->display();
 }
+
+Game::Enemy::Enemy(int x0, int y0, int ehealth):x(x0),y(y0),health(ehealth){}
 
 void Game::initEnemies() {
     //this->ex = 300.f;
@@ -272,7 +221,7 @@ bool Game::enemiesLogic()
             if (e.health > 0)
             {
                 e.health -=1;
-                std::cout << "enemy " << enemynum << " health" << e.health << std::endl;
+                std::cout << "enemy " << enemynum << " health " << e.health << std::endl;
             }
             else if(e.health == 0){
                 death = true;
@@ -283,7 +232,6 @@ bool Game::enemiesLogic()
             }
         }
 
-        //std::cout << e.getPosition().x << " , " << e.getPosition().y << std::endl;
     }
     return death;
 }
@@ -315,4 +263,24 @@ void Game::initPlayer(){
     this->_player.setScale(sf::Vector2f(2.0f,2.0f));
 
     std::cout << " player health: " << pHealth << std::endl;
+}
+// checks if the movement will put you past screen boundaries.
+bool Game::checkBorder(int x, int y, int dx, int dy) {
+    x+=dx;
+    y+=dy;
+    // if you can make the move returns true, if you hit a wall it returns false.
+    if(x > 760 || x < 40 || y > 520 || y < 00){return false;}
+    else{return true;}
+}
+// give it unit directions of movement
+void Game::playerMove(int hori,int vert) {
+    //checks if it'll hit a wall if it moves in direction specified
+    if(this->checkBorder(_player.getPosition().x,_player.getPosition().y,move_dist*hori,move_dist*vert)){
+        this->_player.move(move_dist*hori, move_dist*vert);
+    }
+    else{
+        // if it hits wall, you take damage for running into a wall and it lets you know.
+        pHealth -=2;
+        std::cout << " player health: " << pHealth << std::endl;
+    }
 }

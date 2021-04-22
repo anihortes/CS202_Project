@@ -37,6 +37,7 @@ public:
 
     int move_dist = 10.f;
     bool enemiesLogic();
+    void playerMove(int hori,int vert);
 
 private:
     sf::RenderWindow *_window;
