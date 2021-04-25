@@ -11,7 +11,7 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/Chris/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake"
+			"path" : "C:/Users/willg/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -29,7 +29,7 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/Chris/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake"
+			"path" : "C:/Users/willg/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -688,34 +688,34 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfigVersion.cmake"
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfigVersion.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfig.cmake"
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfig.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets.cmake"
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets-debug.cmake"
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets-debug.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets-release.cmake"
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLSharedTargets-release.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfigDependencies.cmake"
+			"path" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml/SFMLConfigDependencies.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/Chris/source/repos/cs202Final/out/build/x86-Debug",
-		"source" : "C:/Users/Chris/source/repos/cs202Final"
+		"build" : "C:/Users/willg/OneDrive/CS 202x/CS 202x Project/out/build/x86-Debug",
+		"source" : "C:/Users/willg/OneDrive/CS 202x/CS 202x Project"
 	},
 	"version" : 
 	{

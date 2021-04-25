@@ -25,8 +25,10 @@ void Game::initWindow() {
     this->_window->setFramerateLimit(60);
 }
 
+// Simple Function to draw background once
 void Game::initBackground()
 {
+    // Static is used or else white square problem with SFML happens
     static sf::Texture backgroundTexture = loadTextures("../dungeon_floor.png");
     _background.setTexture(backgroundTexture);
     this->_background.setScale(sf::Vector2f(2.0f, 1.5f));
@@ -141,6 +143,7 @@ void Game::initEnemies() {
 
 void Game::spawnEnemies()
 {
+    // Allows enemies to spawn in a random position in the windows size
     this->_enemy.setPosition(
        static_cast<float>( rand() % static_cast<int>(this->_window->getSize().x + this->_enemy.getScale().x)),
        static_cast<float>( rand() % static_cast<int>(this->_window->getSize().y + this->_enemy.getScale().y))
@@ -176,7 +179,7 @@ bool Game::enemiesLogic()
         enemyAmount++;//might want to spawn batches of enemys
     }
 
-    int enemyDist = 10;
+    int enemyDist = 10; // Enemy Max Travel distance
     //this is the logic f|| enemy movemenet
     int enemynum = 0;
     for (auto &e : this-> _enemies)
@@ -244,6 +247,7 @@ void Game::renderEnemies()
     }
 }
 
+//simple function to load textures for sprites
 sf::Texture Game::loadTextures(std::string name){
 
     sf::Texture texture;

@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Chris/source/repos/cs202Final/out/build/x86-Debug"
+			"value" : "c:/Users/willg/OneDrive/CS 202x/CS 202x Project/out/build/x86-Debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -511,7 +511,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Chris/source/repos/cs202Final"
+			"value" : "C:/Users/willg/OneDrive/CS 202x/CS 202x Project"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -523,7 +523,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/Chris/source/repos/cs202Final/out/install/x86-Debug"
+			"value" : "C:/Users/willg/OneDrive/CS 202x/CS 202x Project/out/install/x86-Debug"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -1035,7 +1035,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/Chris/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake"
+			"value" : "C:/Users/willg/source/repos/vcpkg/scripts/buildsystems/vcpkg.cmake"
 		},
 		{
 			"name" : "CMAKE_VERBOSE_MAKEFILE",
@@ -1063,7 +1063,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Chris/source/repos/cs202Final/out/build/x86-Debug"
+			"value" : "C:/Users/willg/OneDrive/CS 202x/CS 202x Project/out/build/x86-Debug"
 		},
 		{
 			"name" : "CS202_Project_SOURCE_DIR",
@@ -1075,7 +1075,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Chris/source/repos/cs202Final"
+			"value" : "C:/Users/willg/OneDrive/CS 202x/CS 202x Project"
 		},
 		{
 			"name" : "SFML_DIR",
@@ -1087,7 +1087,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/Chris/source/repos/vcpkg/installed/x86-windows/share/sfml"
+			"value" : "C:/Users/willg/source/repos/vcpkg/installed/x86-windows/share/sfml"
 		},
 		{
 			"name" : "SFML_DOC_DIR",
@@ -1271,7 +1271,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Chris/source/repos/vcpkg"
+			"value" : "C:/Users/willg/source/repos/vcpkg"
 		},
 		{
 			"name" : "_VCPKG_INSTALLED_DIR",
@@ -1283,7 +1283,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/Chris/source/repos/vcpkg/installed"
+			"value" : "C:/Users/willg/source/repos/vcpkg/installed"
 		}
 	],
 	"kind" : "cache",
